@@ -44,7 +44,7 @@ export default class Client {
    * @param {any} value - The value to associate with the key.
    * @returns {Promise<Object>} - The formatted JSON response.
    */
-  async createKVPair(key, value) {
+  async create(key, value) {
     const response = await fetch(`${this.baseUrl}/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -98,6 +98,17 @@ export default class Client {
    */
   async delete(key) {
     const response = await fetch(`${this.baseUrl}/delete/${key}`, {
+      method: "DELETE",
+    });
+    return this.handleResponse(response);
+  }
+
+  /**
+   * Delete all key-value pairs.
+   * @returns {Promise<Object>} - The formatted JSON response.
+   */
+  async deleteAll() {
+    const response = await fetch(`${this.baseUrl}/delete`, {
       method: "DELETE",
     });
     return this.handleResponse(response);
